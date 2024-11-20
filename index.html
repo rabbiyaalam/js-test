@@ -1,0 +1,136 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>JavaScript Tasks</title>  
+    <style>  
+        body {  
+            font-family: 'Arial', sans-serif;  
+            margin: 20px;  
+            background-color: #e9f5ff;  
+            color: #333;  
+        }  
+        h1, h2 {  
+            color: #007bff;  
+        }  
+        button {  
+            background-color: #007bff;  
+            color: white;  
+            border: none;  
+            padding: 10px 15px;  
+            border-radius: 5px;  
+            cursor: pointer;  
+            transition: background-color 0.3s;  
+        }  
+        button:hover {  
+            background-color: #0056b3;  
+        }  
+        pre {  
+            background: #f4f4f4;  
+            padding: 10px;  
+            border-radius: 5px;  
+            border: 1px solid #ccc;  
+        }  
+    </style>  
+</head>  
+<body>  
+    <h1>JavaScript Tasks</h1>  
+
+    <h2>1. Variable Scoping and Closure</h2>  
+    <button id="counterIncrement">Increment Counter</button>  
+    <button id="counterReset">Reset Counter</button>  
+    <pre id="counterOutput">Counter: 0</pre>  
+
+    <h2>2. Template Literals</h2>  
+    <input type="text" id="userName" placeholder="Enter your name" />  
+    <input type="text" id="timeOfDay" placeholder="Enter time of day" />  
+    <button id="greetUserBtn">Greet User</button>  
+    <pre id="greetOutput"></pre>  
+
+    <h2>3. Destructuring and Default Parameters</h2>  
+    <button id="logUserInfoBtn">Log User Info</button>  
+    <pre id="userInfoOutput"></pre>  
+
+    <h2>Part 3: Debugging</h2>  
+    <button id="addFunctionBtn">Test Add Function</button>  
+    <pre id="addOutput"></pre>  
+    <button id="promiseBtn">Resolve Promise</button>  
+    <pre id="promiseOutput"></pre>  
+
+    <script>  
+        // 1. Variable Scoping and Closure  
+        function createCounter() {  
+            let count = 0; // Private variable  
+
+            return {  
+                increment: function() {  
+                    count++;  
+                    return count;  
+                },  
+                reset: function() {  
+                    count = 0;  
+                    return count;  
+                }  
+            };  
+        }  
+
+        const counter = createCounter();  
+        document.getElementById('counterIncrement').onclick = function() {  
+            const currentCount = counter.increment();  
+            document.getElementById('counterOutput').innerText = `Counter: ${currentCount}`;  
+        };  
+
+        document.getElementById('counterReset').onclick = function() {  
+            const resetCount = counter.reset();  
+            document.getElementById('counterOutput').innerText = `Counter: ${resetCount}`;  
+        };  
+
+        // 2. Template Literals  
+        function greetUser(name, timeOfDay) {  
+            return `Good ${timeOfDay}, ${name}!`;  
+        }  
+
+        document.getElementById('greetUserBtn').onclick = function() {  
+            const name = 'Rabbiya';  // Use Rabbiya instead of user input  
+            const timeOfDay = document.getElementById('timeOfDay').value;  
+            const greeting = greetUser(name, timeOfDay);  
+            document.getElementById('greetOutput').innerText = greeting;  
+        };  
+
+        // 3. Destructuring and Default Parameters  
+        const user = { name: 'Kashaf', age: 17, city: 'Karachi' };  
+
+        function logUserInfo({ name = 'Unknown', city = 'Unknown' }) {  
+            return `Name: ${name}, City: ${city}`;  
+        }  
+
+        document.getElementById('logUserInfoBtn').onclick = function() {  
+            const userInfo = logUserInfo(user);  
+            document.getElementById('userInfoOutput').innerText = userInfo;  
+        };  
+
+        // Part 3: Debugging  
+        // 1. Fix the Arrow Function  
+        const add = (a, b) => a + b;  
+
+        document.getElementById('addFunctionBtn').onclick = function() {  
+            const result = add(2, 3);  
+            document.getElementById('addOutput').innerText = `Add Result: ${result}`;  
+        };  
+
+        // 2. Resolve a Promise  
+        const myPromise = new Promise((resolve, reject) => {  
+            setTimeout(() => {  
+                resolve('Success!');  
+            }, 1000);  
+        });  
+
+        document.getElementById('promiseBtn').onclick = function() {  
+            myPromise.then(result => {  
+                document.getElementById('promiseOutput').innerText = result;  
+            });  
+        };  
+    </script>  
+</body>  
+</html>
